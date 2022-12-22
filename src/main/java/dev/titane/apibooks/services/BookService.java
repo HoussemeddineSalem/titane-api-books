@@ -8,7 +8,7 @@ public interface BookService {
 
     Long createBook(BookDTO bookDTO);
 
-    List<BookDTO> getBook(String title, String author);
+    List<BookDTO> getBooks(String title, String author);
 
     BookDTO updateBook(Long bookId, BookDTO bookDTO);
 
