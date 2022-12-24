@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/book")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class BookController {
 
     BookService bookService;
@@ -24,9 +25,10 @@ public class BookController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<BookDTO> getBook(
+            @RequestParam(required = false) Long id,
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String author) {
-        return bookService.getBooks(title, author);
+        return bookService.getBooks(id,title, author);
     }
 
     @PutMapping("/{bookId}")

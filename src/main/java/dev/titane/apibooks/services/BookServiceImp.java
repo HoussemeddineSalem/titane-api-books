@@ -30,10 +30,10 @@ public class BookServiceImp implements BookService {
     }
 
     @Override
-    public List<BookDTO> getBooks(String title, String author) {
+    public List<BookDTO> getBooks(Long id,String title, String author) {
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
 
-        Example<Book> exampleQuery = Example.of(new Book(null, title, author), matcher);
+        Example<Book> exampleQuery = Example.of(new Book(id, title, author), matcher);
         List<Book> bookList = bookRepository.findAll(exampleQuery);
 
         return bookList.stream().map(book -> bookMapper.toDTO(book)).collect(Collectors.toList());
