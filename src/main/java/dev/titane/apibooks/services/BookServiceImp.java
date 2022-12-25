@@ -1,6 +1,7 @@
 package dev.titane.apibooks.services;
 
 import dev.titane.apibooks.entities.Book;
+import dev.titane.apibooks.errors.ErrorResponses;
 import dev.titane.apibooks.models.BookDTO;
 import dev.titane.apibooks.repositories.BookRepository;
 import dev.titane.apibooks.utils.BookMapper;
@@ -9,7 +10,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +43,7 @@ public class BookServiceImp implements BookService {
     public BookDTO updateBook(Long bookId, BookDTO bookDTO) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> {
-                    throw new EntityNotFoundException("NOT FOUND");
+                    throw new RuntimeException(ErrorResponses.NO_BOOKS_FOUND.getMessage());
                 });
 
         bookMapper.updateDAO(bookDTO, book);
